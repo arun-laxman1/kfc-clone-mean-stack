@@ -381,6 +381,37 @@
                 }
               }
             }
+            
+            function getLocation() {
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+              }
+            }
+
+            function showPosition(position) {
+
+                  const Http = new XMLHttpRequest();
+
+                  var bigdata_api =
+                    "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude="+position.coords.latitude+"&longitude="+position.coords.longitude+"&localityLanguage=en";
+
+                  Http.open("GET", bigdata_api);
+                  Http.send();
+                  Http.onreadystatechange = function() {
+                    var para = document.createElement("p");
+                    if (this.readyState == 4 && this.status == 200) {
+                      var myObj = JSON.parse(this.responseText);
+                      var message = "You are currently present in" + " " + myObj.locality + ", " + myObj.countryName+".";
+                        
+                      var node = document.createTextNode(message);
+                      para.appendChild(node);
+                        
+                      var element = document.getElementById("map");
+                      element.innerHTML = "";
+                      element.appendChild(para);
+                    }
+                  };               
+            }
         </script>
 
         <svg id ="kfc_svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="500.000000pt" height="280.000000pt" viewBox="0 0 500.000000 280.000000" preserveAspectRatio="xMidYMid meet" class="center">

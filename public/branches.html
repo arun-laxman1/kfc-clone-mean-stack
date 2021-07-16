@@ -40,48 +40,13 @@
         </center>
         
         <center>
-        <div id ="map">
+        
             <p>Click here to know your location!</p>
             <button onclick="getLocation()">GET MY LOCATION</button>
-
+        <div id ="map">
         </div>
         </center>
-        
-        <script>
-            
-            var para = document.createElement("p");
-            
-            function getLocation() {
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-              } else {
-                  var node = document.createTextNode("Geolocation is not supported by this browser.");
-                  para.appendChild(node);
-              }
-            }
 
-            function showPosition(position) {
-
-                  const Http = new XMLHttpRequest();
-
-                  var bigdata_api =
-                    "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude="+position.coords.latitude+"&longitude="+position.coords.longitude+"&localityLanguage=en";
-
-                  Http.open("GET", bigdata_api);
-                  Http.send();
-                  Http.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                      var myObj = JSON.parse(this.responseText);
-                      var message = "You are currently present in" + " " + myObj.locality + ", " + myObj.countryName+".";
-                      var node = document.createTextNode(message);
-                      para.appendChild(node);
-                        
-                      var element = document.getElementById("map");
-                      element.appendChild(para);
-                    }
-                  };               
-            }
-        </script>
     </body>
 
 </html>

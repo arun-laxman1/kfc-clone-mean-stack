@@ -5,6 +5,8 @@ var mongodb = require('mongodb');
 var unirest = require("unirest");
 var app = express();
 
+const uri = "mongodb+srv://test:test@cluster0.bj0t1.mongodb.net/mydb?retryWrites=true&w=majority";
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -15,7 +17,7 @@ app.get('/', function(req, res, next) {
 });
 
 app.post('/insert', function (req, res) {
-    mongodb.MongoClient.connect('mongodb://localhost:27017',{ useUnifiedTopology: true }, function(err, db){
+    mongodb.MongoClient.connect(uri,{ useUnifiedTopology: true }, function(err, db){
         var dbO = db.db("mydb");
         
         function getValueForNextSequence(sequenceOfName, callback)
@@ -65,7 +67,7 @@ app.post('/insert', function (req, res) {
 });
 
 app.post('/view', function(req, res, next){
-    mongodb.MongoClient.connect('mongodb://localhost:27017',{ useUnifiedTopology: true }, function(err, db){
+    mongodb.MongoClient.connect(uri,{ useUnifiedTopology: true }, function(err, db){
         var dbO = db.db("mydb");
         dbO.collection("feedback").find({ user_id : parseInt(req.body.id)}).toArray(function(err, result) {
             if(result.length == 0)
@@ -88,7 +90,7 @@ app.post('/view', function(req, res, next){
 });
 
 app.post('/update', function(req, res, next){
-    mongodb.MongoClient.connect('mongodb://localhost:27017',{ useUnifiedTopology: true }, function(err, db){
+    mongodb.MongoClient.connect(uri,{ useUnifiedTopology: true }, function(err, db){
         var dbO = db.db("mydb");
         dbO.collection("feedback").updateOne({ user_id : parseInt(req.body.id)}, { $set: { rating: req.body.rating } }, function(err, obj) {
              if(obj.result.nModified > 0)
