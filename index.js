@@ -108,6 +108,6 @@ app.post('/update', function(req, res, next){
 
 module.exports = app;
 
-app.listen(8080 , () =>{
+app.listen(process.env.PORT || 8080 , () =>{
     console.log("Server listening at port 8080!");
 } );
