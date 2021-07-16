@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="My first webpage">
+        <link rel="icon" type="image/png" href="Media/Kfc.ico">
+        <link rel=stylesheet href="MySecondWebPage.css">
+    </head>
+    
+    
+    <body>
+        <div id="marq0">
+            <hr>
+            <marquee id="marq1">WELCOME TO KFC INDIA!</marquee>
+            <hr>
+        </div>
+        
+        <script>
+            var para = document.createElement("marquee");
+            var node = document.createTextNode("WELCOME TO KFC INDIA! IT'S FINGER LICKIN' GOOD!!");
+            para.appendChild(node);
+            var parent = document.getElementById("marq0");
+            var child = document.getElementById("marq1");
+            parent.replaceChild(para, child);
+        </script>
+        
+        <nav>
+            <p><a href="http://www.youtube.com/user/KFCinIndia">Click here to follow us in Youtube!</a></p>
+        </nav>
+        
+        <img src="Media/kfc.png" width=1262px height=470px usemap="#mymap">
+        
+        <section>
+                
+        </section>
+        
+        <map name="mymap">
+            <area shape="rect" coords="110,380,300,360" href="https://online.kfc.co.in/home">
+        </map>
+        
+        <div style="width:1262px; height: 480px;">
+            <br>
+            <br>
+            <img id="kfc2" class="center" src="Media/kfc1.PNG" width="1000px" height="400px">
+        </div>
+        
+        
+
+    </body>
+       
+</html>

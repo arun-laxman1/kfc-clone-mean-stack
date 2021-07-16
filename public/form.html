@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <title>Feedback Form</title>
+        <style>
+
+            #form{
+                font-family: 'Bebas Neue';
+                align-items: center;
+                width: 600px;
+                height: auto;
+                background-color: white;
+                padding: 10px;
+                box-shadow: 10px 10px 10px 10px;
+            }
+            
+            input[type=text] {
+              width: 50%;
+              box-sizing: border-box;
+              font-size: 16px;
+              background-position: 10px 10px; 
+              background-repeat: no-repeat;
+              padding: 12px 20px 12px 40px;
+              border: none;
+              border-bottom: 2px solid red;
+              background-color: white;
+            }
+            
+            input[type=text]:focus {
+                outline: none;
+            }
+            
+            textarea{
+                resize: none;
+                width: 200px;
+                height: 70px;
+                outline: none;
+                border: none;
+                border-left: 2px solid red;
+            }
+            
+            .button {
+              background-color: red;
+              border: none;
+              color: white;
+              padding: 8px 16px;
+              text-align: center;
+              font-size: 16px;
+              opacity: 0.6;
+              transition: 0.3s;
+              display: inline-block;
+              text-decoration: none;
+              cursor: pointer;
+              margin-top: 5px;
+              outline: none;
+            }
+            
+            .button:hover{
+                opacity: 1;
+            }
+            
+        </style>
+      
+    </head>
+    
+    
+    <body>
+        <center>
+            <br>
+            <br>
+        <div id="form" ng-controller="formCtrl">
+            <h1>Help us Improve!!</h1>
+ 
+                <form name="feedback" method="post" onsubmit="return validate()" action="/insert">
+                    <label for="name">Name:</label>
+                    <input type="text" ng-model="name" name="name"><br><br>
+
+                    <label for="phone">Phone:</label>
+                    <input type="text" ng-model="phone" name="phone"><br><br>
+                    <label for="rating">Rating:</label>
+                    <input type="radio" id="1" ng-model="rating" ng-value="1" name="rating" value="1">
+                    <label for="1">1</label>
+                    <input type="radio" id="2" ng-model="rating" ng-value="2" name="rating" value="2">
+                    <label for="2">2</label>
+                    <input type="radio" id="3" ng-model="rating" ng-value="3" name="rating" value="3">
+                    <label for="3">3</label>
+                    <input type="radio" id="4" ng-model="rating" ng-value="4" name="rating" value="4">
+                    <label for="4">4</label>
+                    <input type="radio" id="5" ng-model="rating" ng-value="5" name="rating" value="5">
+                    <label for="5">5</label><br><br>
+                    <textarea name="message" ng-model="msg" placeholder="Type in your valuable comments here" width=400px height=400px></textarea><br>
+
+                    <button name='b1' class="button">Submit</button>
+
+                </form>
+                               
+        </div>
+        </center>
+    </body>
+
+</html>

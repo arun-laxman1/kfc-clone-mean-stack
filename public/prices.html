@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <link rel=stylesheet href="MySecondWebPage.css">
+        
+        <style>
+            table, th, td {
+              border: 3px groove black;
+            }
+
+            button{
+              background-color: #E4042C;
+              border: none;
+              color: white;
+              padding: 16px 32px;
+              text-align: center;
+              font-size: 16px;
+              margin: 4px 2px;
+              opacity: 0.6;
+              transition: 0.3s;
+              display: inline-block;
+              text-decoration: none;
+              cursor: pointer;
+            }
+            button:hover {opacity: 1}
+
+        </style>
+    </head>
+    
+    
+    <body>
+
+        
+        <div ng-controller="namesCtrl">
+            <h2>&nbsp;&nbsp;{{theTime}}</h2>
+ 
+                 <div ng-show="bool">
+                    <center><h1>PRICE LIST</h1>
+                        <h2>Search: <input type="text" ng-model="test"></h2>
+                        
+                        <table width="90%" frame=void rules=rows>
+                          <tr>
+                            <th><h2>ITEM NAME</h2></th>
+                            <th><h2>PRICE</h2></th>
+                            <th><h2>RATINGS</h2></th>
+                          </tr>
+                          <tr ng-repeat="x in names | orderBy:myOrderBy | filter: test">
+                            <td><center>{{x.name | uppercase}}</center></td>
+                            <td><center>{{x.price | currency: "INR "}}</center></td>
+                            <td><center>{{x.rating}}/5</center></td>
+                          </tr>
+                        </table>
+                        </center>    
+
+                     <center>
+                        <h3>Sort By Name:&nbsp;<input type="radio" ng-model="value" value="name" ><br></h3>
+                        <h3>Sort By Price:&nbsp;<input type="radio" ng-model="value" value="price" ><br></h3>
+                        <h3>Sort By Rating:&nbsp;<input type="radio" ng-model="value" value="rating"><br></h3>
+                        <button height=100px width=200px ng-click='orderByMe(value)'>Sort</button>
+                     </center>
+                  </div>
+                
+
+             <center>
+                 <button ng-click="bool=!bool">
+                    {{toggleText}}
+                 </button>
+             </center>
+             <br><br>
+             
+             <center>
+                <h2>INR TO USD CONVERTOR</h2>
+                 <h3>Enter amount in INR:&nbsp;<input name="x" type=number ng-model="money"></h3>
+                 <h3>Amount in USD: {{money | myFilter | currency}}</h3>
+                 <br><br>
+             </center>
+            </div>
+                
+    </body>
+
+</html>

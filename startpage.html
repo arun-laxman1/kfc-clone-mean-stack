@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Order online - KFC</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+        <link rel="icon" type="image/png" href="Media/Kfc.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel=stylesheet href="MySecondWebPage.css">
+        <script src="https://kit.fontawesome.com/7d27d23c4f.js" crossorigin="anonymous"></script> 
+        <style>
+            .navbar {
+              overflow: hidden;
+              background-color: #E4042C;
+            }
+
+            .navbar a {
+              float: left;
+              font-size: 16px;
+              color: white;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+              border-right: 2px solid black;
+            }
+            
+            #feed{
+                border-left: 2px solid black;
+                border-right: 2px solid black;
+            }
+            
+            .dropdown {
+              float: left;
+              overflow: hidden;
+            }
+
+            .dropdown .dropbtn {
+              cursor: pointer;
+              font-size: 16px;  
+              border: none;
+              outline: none;
+              color: white;
+              padding: 14px 16px;
+              background-color: inherit;
+              font-family: inherit;
+              margin: 0;
+            }
+            
+            .dropdown .dropbtn2 {
+              cursor: pointer;
+              font-size: 16px;  
+              border: none;
+              outline: none;
+              color: white;
+              padding: 14px 16px;
+              background-color: inherit;
+              font-family: inherit;
+              margin: 0;  
+            }
+
+            .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus{
+              background-color: #111;
+            }
+            
+            .dropbtn2:hover{
+               background-color: #111; 
+            }
+            
+            .dropbtn2:focus{
+               background-color: #111; 
+            }
+            
+            .dropdown-content {
+              display: none;
+              position: absolute;
+              background-color: #f9f9f9;
+              min-width: 160px;
+              box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+              z-index: 1;
+            }
+
+            .dropdown-content a {
+              float: none;
+              color: black;
+              padding: 12px 16px;
+              text-decoration: none;
+              display: block;
+              text-align: left;
+            }
+
+            .dropdown-content a:hover {
+              background-color: #ddd;
+            }
+
+            .active{
+              background-color: #111;  
+            }
+            
+            .show {
+              display: block;
+            }
+        </style>
+        
+    </head>
+
+    <body ng-app="myApp">
+        
+        <header class="header" style="position: sticky">
+            <img  style="float: left" src="Media/kfc_logo.png" width=150px height=100px>
+            <h1 style="color:#E4042C; text-shadow: 0 0 7px grey; padding-top: 5px; float: left">KFC -- It's finger licking good!!</h1>   
+        </header>
+
+        <div id="navbar" class="navbar">
+          <a class="li active" href="#/!">Home</a>
+          <a class="li" href="#!specials">Specials</a>
+          <div class="dropdown">
+            <button class="li dropbtn" onclick="myFunction()">Gallery 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown1">
+              <a href="#!gallery">Videos</a>
+              <a href="#!gallery2">Audios</a>
+            </div>
+          </div>  
+          <div class="dropdown" id="feed">
+            <button class="li dropbtn2" onclick="myFunction2()">Feedback 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown2">
+              <a href="#!form">New Feedback</a>
+              <a href="#!form1">View Feedback</a>
+              <a href="#!form2">Modify Feedback</a>
+            </div>
+          </div>
+          <a class="li" href="#!branches">Branches</a>
+          <a class="li" href="#!prices">Prices</a>
+        </div>
+        
+        <div ng-view></div>
+
+        <script>
+            var myApp = angular.module("myApp", ["ngRoute", 'ngAnimate']);
+            
+            myApp.config(function($routeProvider) {
+                $routeProvider
+                .when("/", {
+                    templateUrl : "mainpage.html"
+                })
+                .when("/specials", {
+                    templateUrl : "specials.html"
+                })
+                .when("/gallery", {
+                    templateUrl : "gallery.html",
+                    controller:'galleryCtrl',
+                })
+                .when("/gallery2", {
+                    templateUrl : "gallery2.html"
+                })
+                .when("/form", {
+                    templateUrl : "form.html",
+                    controller:'formCtrl',
+                })
+                .when("/form1", {
+                    templateUrl : "form2.html"
+                })
+                .when("/form2", {
+                    templateUrl : "form3.html"
+                })
+                .when("/branches", {
+                    templateUrl : "branches.html"
+                })
+                .when("/prices", {
+                    templateUrl : "prices.html",
+                    controller:'namesCtrl',
+                })
+                .otherwise("/", {
+                    templateUrl : "mainpage.html"
+                });
+            });
+            
+            myApp.controller('namesCtrl', function($scope, $interval) {
+              $scope.names = [
+                {name:'Hot and crispy chicken bucket',price: 2020,rating:3.1},
+                {name:'Fiery grilled chicken bucket',price:2900 ,rating:4.3},
+                {name:'Chicken Biryani meal',price: 3699,rating:2.1},
+                {name:'Sawan feast',price: 1820 ,rating:3.7},
+                {name:'Hot drumlets',price:470,rating:4.5},
+                {name:'Hot and crispy Fillets',price:570,rating:3.8},
+                {name:'Lemon Krushers',price:99,rating:4.8},
+                {name:'Classic sub',price:320,rating:4.2},
+                {name:'Zinger burger',price:610,rating:3.4}
+              ];
+              
+              $scope.$watch('bool', function(){
+                    $scope.toggleText = $scope.bool ? 'Hide Table' : 'Show Table';
+              });
+              $scope.orderByMe = function(x) {
+                $scope.myOrderBy = x;
+              }
+              $scope.theTime = new Date().toLocaleTimeString();
+              $interval(function () {
+                  $scope.theTime = new Date().toLocaleTimeString();
+              }, 1000);
+            });
+
+            myApp.service('usd_convert', function() {
+                this.myFunc = function (x) {
+                return x*0.014;
+                }
+            });
+
+            myApp.filter('myFilter',['usd_convert', function(usd_convert) {
+            return function(x) {
+                return usd_convert.myFunc(x);
+            };
+            }]);
+            
+            myApp.controller('galleryCtrl', function($scope, $document){
+               $scope.showFirst = true;
+                $scope.showSecond = true;
+                var video = angular.element($document[0].querySelector('#vid'))[0];
+                $scope.pauseorPlay = function(){
+                     if(video.paused)
+                     {
+                         video.play(); 
+                         $scope.showFirst = false;
+                     }
+                     else{
+                         video.pause();
+                         $scope.showFirst = true;
+                     }
+                }
+                $scope.frwd = function()
+                {
+                     if(video.paused)
+                     { 
+                         video.currentTime = video.currentTime + 5;
+                         video.pause();
+                         $scope.showFirst = true;
+                         
+                     }
+                     else{
+                         video.currentTime = video.currentTime + 5;
+                         video.play();
+                         $scope.showFirst = false;
+                     }  
+                }
+                $scope.brwd = function()
+                {
+                    if(video.paused)
+                     { 
+                         video.currentTime = video.currentTime - 5;
+                         video.pause();
+                         $scope.showFirst = true;
+                         
+                     }
+                     else{
+                         video.currentTime = video.currentTime - 5;
+                         video.play();
+                         $scope.showFirst = false;
+                     }  
+                }
+                $scope.stop = function()
+                {
+                    video.currentTime = 0;
+                    video.pause();
+                    $scope.showFirst = true;
+                }
+                $scope.mute = function()
+                {
+                  if (video.muted == false) 
+                  {
+                        video.muted = true;
+                        $scope.showSecond = false;
+                  } 
+                  else {
+                        video.muted = false;
+                        $scope.showSecond = true;
+                  }
+                }
+                $scope.fullscreen = function()
+                {
+                    if (video.requestFullscreen) {
+                        video.requestFullscreen();
+                    }
+                } 
+                
+                $scope.changeFunc = function() 
+                {
+                    video.playbackRate = $scope.val;
+                }
+            });
+            
+            myApp.controller('formCtrl', function($scope){
+               $scope.check = function()
+               {
+                     var ph_regex = /^[1-9][0-9]{9}$/;
+                     var name_regex = /^[a-zA-Z" "]+$/;
+                     var name = $scope.name;
+                     var ph_no = $scope.phone;
+                     var rating = $scope.rating;
+                     var message = $scope.msg;
+                   
+                     if (name == "" || name == null)
+                     {
+                       alert("Name is mandatory");
+                       return false;
+                     }
+                    
+                    if(name_regex.test(name) == false)
+                    {
+                        alert("Name must be alphabetical letters only!");
+                        return false;
+                    }
+                    
+                    if(ph_no == "" || ph_no == null)
+                    {
+                      alert("Phone number is mandatory");
+                      return false;
+                    }
+
+                    if(ph_regex.test(ph_no) == false){
+                      alert("This is not a valid phone number");
+                      return false;
+                    }
+                    
+                    if(rating == "" || rating == null)
+                    {
+                        alert("Please choose a rating!");
+                        return false;
+                    }
+                    
+                    if(message == "" || message == null)
+                    {
+                        alert("Please enter your comments!");
+                        return false;
+                    }
+                    
+                    alert("Submitted successfully!!");
+                    return true;
+               }
+            });
+            
+        </script>
+        
+        <script>
+            function validate() {
+               return angular.element(document.getElementById("form")).scope().check();
+            }
+            
+            var header = document.getElementById("navbar");
+            var btns = header.getElementsByClassName("li");
+            for (var i = 0; i < btns.length; i++) {
+              btns[i].addEventListener("click", function() {
+              var current = document.getElementsByClassName("active");
+              current[0].className = current[0].className.replace(" active", "");
+              this.className += " active";
+              });
+            }
+            
+            function myFunction() {
+              document.getElementById("myDropdown1").classList.toggle("show");
+            }
+            function myFunction2() {
+              document.getElementById("myDropdown2").classList.toggle("show");
+            }
+
+            window.onclick = function(e) {
+              if (!e.target.matches('.dropbtn')) {
+              var myDropdown1 = document.getElementById("myDropdown1");
+                if (myDropdown1.classList.contains('show')) {
+                  myDropdown1.classList.remove('show');
+                }
+              }
+              
+              if (!e.target.matches('.dropbtn2')) {
+              var myDropdown2 = document.getElementById("myDropdown2");
+                if (myDropdown2.classList.contains('show')) {
+                  myDropdown2.classList.remove('show');
+                }
+              }
+            }
+        </script>
+
+        <svg id ="kfc_svg" version="1.0" xmlns="http://www.w3.org/2000/svg" width="500.000000pt" height="280.000000pt" viewBox="0 0 500.000000 280.000000" preserveAspectRatio="xMidYMid meet" class="center">
+
+            <g transform="translate(0.000000,280.000000) scale(0.100000,-0.100000)"
+            fill="#000000" stroke="none">
+            <path id="svg1" class="svg" d="M4150 2074 c-323 -39 -561 -142 -735 -319 -224 -228 -264 -531 -99
+            -755 147 -200 460 -296 849 -261 111 11 295 37 301 44 4 4 63 261 61 263 -1 2
+            -45 -9 -97 -24 -83 -22 -114 -26 -245 -26 -130 0 -158 3 -209 22 -118 44 -200
+            113 -253 214 -26 48 -28 62 -28 158 0 99 2 110 32 171 78 157 246 251 474 266
+            145 10 266 -25 333 -96 17 -17 39 -31 51 -31 19 0 26 17 65 155 30 106 40 159
+            33 166 -22 22 -199 49 -348 53 -82 2 -166 2 -185 0z"/>
+            <path id="svg2" class="svg" d="M456 2043 c-4 -16 -9 -36 -12 -45 -3 -12 0 -18 10 -18 24 0 74 -48
+            80 -78 8 -32 -211 -834 -251 -925 -30 -67 -78 -113 -127 -122 -26 -5 -36 -13
+            -41 -33 -3 -15 -8 -35 -11 -44 -5 -17 16 -18 344 -18 l350 0 6 27 c4 16 9 35
+            12 44 3 12 -7 23 -33 36 -63 33 -64 48 -4 265 29 106 56 196 60 201 4 4 40
+            -44 80 -107 92 -146 208 -302 259 -348 109 -98 186 -118 468 -118 l202 0 6 27
+            c4 16 9 35 11 43 4 12 -7 19 -41 28 -76 21 -132 84 -311 354 -90 135 -163 248
+            -163 251 0 11 588 473 629 494 25 13 55 23 67 23 18 0 25 8 33 38 6 20 11 40
+            11 45 0 4 -155 7 -345 7 l-345 0 -10 -26 c-16 -42 -11 -58 23 -74 50 -24 49
+            -59 -5 -102 -88 -71 -510 -390 -523 -394 -14 -6 83 359 115 432 13 31 28 46
+            63 63 42 20 57 44 57 92 0 5 -148 9 -329 9 l-329 0 -6 -27z"/>
+            <path id="svg3" class="svg" d="M2190 2044 c-17 -43 -12 -61 20 -74 38 -16 60 -46 60 -83 0 -16 -65
+            -264 -144 -550 -80 -287 -148 -534 -151 -549 l-7 -28 296 0 295 0 12 42 c10
+            38 9 44 -7 53 -43 24 -64 54 -64 92 0 21 20 108 44 193 l43 155 149 3 c180 4
+            222 -2 270 -34 20 -14 37 -24 39 -22 2 4 75 295 75 303 0 3 -104 5 -231 5
+            l-230 0 7 23 c4 12 19 67 34 122 l27 100 222 3 c241 3 263 -1 297 -54 11 -16
+            24 -24 37 -22 18 3 26 24 57 148 20 80 40 157 43 173 l7 27 -595 0 -595 0 -10
+            -26z"/>
+            </g>
+            
+        </svg>
+        
+        <hr>
+        <footer>
+            <p>ALL RIGHTS RESERVED - &copy;KFC INDIA</p>
+        </footer>
+        <hr>
+
+    </body>
+</html>

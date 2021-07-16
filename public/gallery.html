@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel=stylesheet href="MySecondWebPage.css">
+
+        <style>
+            .btn {
+              background-color: white;
+              border: none;
+              color: black;
+              padding: 12px 16px;
+              font-size: 40px;
+              cursor: pointer;
+              outline: none;
+            }
+        </style>
+    </head>
+    
+    <body>
+
+        <div>
+            <h1 style="color: #E4042C; text-align: center;">The all New Ultimate Burger meal!!</h1>
+            
+            <video id="vid" class="center">
+                <source src="Media/KFC_video.mp4" type="video/mp4">
+            </video>
+            <br>
+            <center>
+                <button class="btn" ng-click="pauseorPlay()"><i class="fa fa-play" ng-if="showFirst"></i>
+                <i class="fa fa-pause" ng-if="!showFirst"></i></button>
+                <button class="btn" ng-click="brwd()"><i class="fa fa-backward"></i></button>
+                <button class="btn" ng-click="frwd()"><i class="fa fa-forward"></i></button>
+                <button class="btn" style="color: #E4042C;" ng-click="stop()"><i class="fa fa-stop"></i></button>
+                <button class="btn" ng-click="mute()"><i class="fa fa-volume-off" ng-if="showSecond"></i><i class="fa fa-volume-up" ng-if="!showSecond"></i></button>
+                <button class="btn" ng-click="fullscreen()"><i class="fa fa-arrows-alt"></i></button>
+                <h2>PlayBack speed: <select ng-model="val" id="selectBox" ng-change="changeFunc();">
+                   <option value="0.5">Slow</option>
+                   <option value="1">Normal</option>
+                   <option value="2">Fast</option>
+                </select></h2>
+            </center>
+            <br>
+            <br>
+        </div>
+        
+    </body>
+
+</html>
